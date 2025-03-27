@@ -1,0 +1,54 @@
+
+openapi: 3.0.0
+info:
+  title: Notion Assistant API
+  version: 1.0.0
+paths:
+  /v1/pages:
+    post:
+      summary: Create a new page in Notion
+      operationId: createPage
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                parent:
+                  type: object
+                  properties:
+                    type:
+                      type: string
+                      example: page_id
+                    page_id:
+                      type: string
+                      example: YOUR_PAGE_ID_HERE
+                properties:
+                  type: object
+                  properties:
+                    title:
+                      type: object
+                      properties:
+                        title:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              text:
+                                type: object
+                                properties:
+                                  content:
+                                    type: string
+                                    example: Sample Page Title
+      responses:
+        '200':
+          description: Successfully created a new page
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+security:
+  - bearerAuth: []
