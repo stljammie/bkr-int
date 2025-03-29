@@ -10,7 +10,12 @@ paths:
       summary: Create a new page in Notion
       operationId: createPage
       parameters:
-        - $ref: '#/components/parameters/NotionVersionHeader'
+        - in: header
+          name: "Notion-Version"
+          required: true
+          schema:
+            type: string
+            default: "2022-06-28"
       requestBody:
         required: true
         content:
@@ -62,14 +67,6 @@ paths:
                 type: object
                 properties: {}
 components:
-  parameters:
-    NotionVersionHeader:
-      in: header
-      name: Notion-Version
-      required: true
-      schema:
-        type: string
-        default: "2022-06-28"
   securitySchemes:
     bearerAuth:
       type: http
