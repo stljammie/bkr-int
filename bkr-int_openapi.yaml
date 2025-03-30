@@ -37,7 +37,7 @@ paths:
                       example: "page_id"
                     page_id:
                       type: string
-                      example: "YOUR_PAGE_ID_HERE"
+                      example: "1c4363c4db78802295fbe0201398582f"
                 properties:
                   type: object
                   required:
