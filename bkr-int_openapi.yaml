@@ -7,7 +7,7 @@ servers:
 paths:
   /v1/pages:
     post:
-      summary: Create a new page in Notion
+      summary: Create a new subpage in Notion
       operationId: createPage
       parameters:
         - in: header
@@ -57,10 +57,10 @@ paths:
                             properties:
                               content:
                                 type: string
-                                example: "Sample Page Title"
+                                example: "Sample Subpage Title"
       responses:
         '200':
-          description: "Page created successfully"
+          description: "Subpage created successfully"
           content:
             application/json:
               schema:
