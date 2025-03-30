@@ -11,7 +11,7 @@ paths:
       operationId: createPage
       parameters:
         - in: header
-          name: "Notion-Version"
+          name: Notion-Version
           required: true
           schema:
             type: string
@@ -34,9 +34,10 @@ paths:
                   properties:
                     type:
                       type: string
-                      example: "page_id"
+                      enum: ["page_id"]
                     page_id:
                       type: string
+                      default: "1c4363c4db78802295fbe0201398582f"
                       example: "1c4363c4db78802295fbe0201398582f"
                 properties:
                   type: object
@@ -60,7 +61,7 @@ paths:
                                 example: "Sample Subpage Title"
       responses:
         '200':
-          description: "Subpage created successfully"
+          description: Subpage created successfully
           content:
             application/json:
               schema:
