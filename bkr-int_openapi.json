@@ -1,0 +1,140 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Notion Subpage Creator",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://api.notion.com"
+    }
+  ],
+  "paths": {
+    "/v1/pages": {
+      "post": {
+        "summary": "Create a new subpage under a parent page in Notion",
+        "operationId": "createPage",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Notion-Version",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "const": "2022-06-28"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["parent", "properties"],
+                "properties": {
+                  "parent": {
+                    "type": "object",
+                    "required": ["type", "page_id"],
+                    "properties": {
+                      "type": {
+                        "type": "string",
+                        "const": "page_id"
+                      },
+                      "page_id": {
+                        "type": "string",
+                        "const": "1c4363c4-db78-8022-95fb-e0201398582f"
+                      }
+                    },
+                    "example": {
+                      "type": "page_id",
+                      "page_id": "1c4363c4-db78-8022-95fb-e0201398582f"
+                    },
+                    "default": {
+                      "type": "page_id",
+                      "page_id": "1c4363c4-db78-8022-95fb-e0201398582f"
+                    }
+                  },
+                  "properties": {
+                    "type": "object",
+                    "required": ["title"],
+                    "properties": {
+                      "title": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "required": ["text"],
+                          "properties": {
+                            "text": {
+                              "type": "object",
+                              "required": ["content"],
+                              "properties": {
+                                "content": {
+                                  "type": "string",
+                                  "example": "My New Subpage"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Subpage created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "object": {
+                      "type": "string",
+                      "example": "page"
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "url": {
+                      "type": "string",
+                      "format": "uri"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request"
+          },
+          "401": {
+            "description": "Unauthorized (check your bearer token)"
+          },
+          "404": {
+            "description": "Parent page not found or not connected with the integration"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
+    "schemas": {}
+  },
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ]
+}
